@@ -1,19 +1,22 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
 hello:
-    path: /hello
-    controller: App\Controller\HelloController::helloAction
+    path : /hello/
+    controller: App\Controller\HelloController::HelloAction
 
-get_book:
+bookGET:
     path: /book
-    controller: App\Controller\BookController::getBookAction
     methods: GET
+    controller: App\Controller\BookController::getBook
 
-add_book:
+bookPOST:
     path: /book
-    controller: App\Controller\BookController::addBookAction
     methods: POST
+    controller: App\Controller\BookController::postBook
 
-patch_book:
+bookPATCH:
     path: /book
-    controller: App\Controller\BookController::patchBookAction
     methods: PATCH
-
+    controller: App\Controller\BookController::patchBook

@@ -2,81 +2,84 @@
 
 namespace App\Model;
 
-class Book
-{
-    /**
-     * @var int
-     */
-    private $id;
+class Book {
 
-    /**
-     * @var string
-     */
-    private $label;
+    private $_id;
+    private $_label;
+    private $_isbn;
+    private $_category;
 
-    /**
-     * @var string
-     */
-    private $isbn;
+    public function __construct($id, $label, $isbn, $category) {
+        $this->_id = $id;
+        $this->_label = $label;
+        $this->_isbn = $isbn;
+        $this->_category = $category;
+    }
 
     /**
-     * @var string
+     * @return mixed
      */
-    private $category;
-
-    public function __construct(int $id, string $label, string $isbn, string $category)
+    public function getId()
     {
-        $this->id = $id;
-        $this->label = $label;
-        $this->isbn = $isbn;
-        $this->category = $category;
+        return $this->_id;
     }
 
-    public function getId(): int
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->id;
+        $this->_id = $id;
     }
 
-    public function getLabel(): string
+    /**
+     * @return mixed
+     */
+    public function getLabel()
     {
-        return $this->label;
+        return $this->_label;
     }
 
-    public function getIsbn(): string
+    /**
+     * @param mixed $label
+     */
+    public function setLabel($label): void
     {
-        return $this->isbn;
+        $this->_label = $label;
     }
 
-    public function getCategory(): string
+    /**
+     * @return mixed
+     */
+    public function getIsbn()
     {
-        return $this->category;
+        return $this->_isbn;
     }
 
-    public function setId(?int $id): void
+    /**
+     * @param mixed $isbn
+     */
+    public function setIsbn($isbn): void
     {
-        if (null !== $id) {
-            $this->id = $id;
-        }
+        $this->_isbn = $isbn;
     }
 
-    public function setLabel(?string $label): void
+    /**
+     * @return mixed
+     */
+    public function getCategory()
     {
-        if (null !== $label) {
-            $this->label = $label;
-        }
+        return $this->_category;
     }
 
-    public function setIsbn(?string $isbn): void
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
     {
-        if (null !== $isbn) {
-            $this->isbn = $isbn;
-        }
+        $this->_category = $category;
     }
 
-    public function setCategory(?string $category): void
-    {
-        if (null !== $category) {
-            $this->category = $category;
-        }
-    }
+
+
 }

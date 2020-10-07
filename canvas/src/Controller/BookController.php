@@ -3,48 +3,56 @@
 
 namespace App\Controller;
 
+
 use App\Model\Book;
+use App\Normalizer\BookNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends AbstractController
 {
-    public function getBookAction(): Response
-    {
-        return $this->json($this->generateOneBook());
+
+    public function postBook(Request $request) {
+        $id = $request->get('id');
+        $label = $request->get('label');
+        $category = $request->get('category');
+        $isbn = $request->get('isbn');
+
+        if (empty($id) || empty($label) || empty($category) || empty($isbn)) return new \Exception("Info manquantes");
+
+        $book = new Book($id, $label,$isbn, $category);
+        $bookNormalize = new BookNormalizer();
+
+        return new Response($bookNormalize->normalize($book));
     }
 
-    public function patchBookAction(Request $request): Response
-    {
-        $book = $this->patchFromRequest($request, $this->generateOneBook());
-
-        return $this->json($book);
+    public function getBook() {
+        $book = new Book(1, "d", true, "é");
+        $bookNormalize = new BookNormalizer();
+        return new Response($bookNormalize->normalize($book));
     }
 
-    public function addBookAction(Request $request): Response
-    {
-        $book = $this->createFromRequest($request);
+    public function patchBook(Request $request) {
+        $initialBook = new Book(1, "Mon livre", true, "Enfant");
 
-        return $this->json($book);
-    }
+        foreach ($request->query->all() as $key => $val) {
+            switch ($key) {
+                case 'id' :
+                    $initialBook->setId($val);
+                    break;
+                case 'label' :
+                    $initialBook->setLabel($val);
+                    break;
+                case 'category' :
+                    $initialBook->setCategory($val);
+                    break;
+                case 'isbn' :
+                    $initialBook->setIsbn($val);
+            }
+        }
+        $bookNormalize = new BookNormalizer();
+        return new Response($bookNormalize->normalize($initialBook));
 
-    private function patchFromRequest(Request $request, Book $book): Book
-    {
-        $book->setId($request->get('id'));
-        $book->setLabel($request->get('label'));
-        $book->setIsbn($request->get('isbn'));
-        $book->setCategory($request->get('category'));
-
-        return $book;
-    }
-
-    private function createFromRequest(Request $request): Book
-    {
-        return new Book($request->get('id'), $request->get('label'), $request->get('isbn'), $request->get('category'));
-    }
-
-    private function generateOneBook(): Book {
-        return new Book(1, 'Necronomicon', '978-2-35294-675-5', '2');
     }
 }
