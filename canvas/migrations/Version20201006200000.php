@@ -1022,12 +1022,10 @@ insert into author (id, first_name, last_name, birth_date) values (999, 'Rockey'
 insert into author (id, first_name, last_name, birth_date) values (1000, 'Lezley', 'Gromley', '2006-12-15');
             "
         );
-
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

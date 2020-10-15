@@ -123,12 +123,10 @@ insert into category (id, label) values (100, 'Drama|Horror|Thriller');
 insert into category (id, label) values (101, 'Thriller');
         "
         );
-
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

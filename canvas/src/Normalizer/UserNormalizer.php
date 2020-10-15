@@ -2,18 +2,18 @@
 
 namespace App\Normalizer;
 
-use App\Entity\Book;
+use App\Entity\User;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 
-class BookNormalizer implements ContextAwareNormalizerInterface
+class UserNormalizer implements ContextAwareNormalizerInterface
 {
     public function supportsNormalization($data, string $format = null, array $context = [])
     {
-        return $data instanceof Book;
+        return $data instanceof User;
     }
 
     /**
-     * @param Book $object
+     * @param User $object
      *
      * @return array|\ArrayObject|bool|float|int|string|null
      */
@@ -21,9 +21,8 @@ class BookNormalizer implements ContextAwareNormalizerInterface
     {
         return [
             'id' => $object->getId(),
-            'label' => $object->getLabel(),
-            'isbn' => $object->getIsbn(),
-            'category' => $object->getCategory(),
+            'firstName' => $object->getFirstName(),
+            'lastName' => $object->getLastName(),
         ];
     }
 }

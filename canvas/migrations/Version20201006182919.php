@@ -122,12 +122,10 @@ final class Version20201006182919 extends AbstractMigration
                     foreign key (user) references user (id)
             );'
         );
-
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }
