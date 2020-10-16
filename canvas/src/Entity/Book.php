@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Book.
  *
- * @ORM\Table(name="book")
- * @ORM\Entity
+ * @ORM\Table(name="book", indexes={@ORM\Index(name="book_category_id_fk", columns={"category"})})
+ * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  */
 class Book
 {
@@ -17,7 +17,7 @@ class Book
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -36,8 +36,12 @@ class Book
     private $isbn;
 
     /**
-     * @var int
-     * @ORM\Column(name="category", type="integer")
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category", referencedColumnName="id")
+     * })
      */
     private $category;
 
@@ -61,12 +65,12 @@ class Book
         $this->isbn = $isbn;
     }
 
-    public function getCategory(): int
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
-    public function setCategory(int $category): void
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }

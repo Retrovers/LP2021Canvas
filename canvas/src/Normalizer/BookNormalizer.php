@@ -19,11 +19,22 @@ class BookNormalizer implements ContextAwareNormalizerInterface
      */
     public function normalize($object, string $format = null, array $context = [])
     {
-        return [
+        $data = [
             'id' => $object->getId(),
             'label' => $object->getLabel(),
             'isbn' => $object->getIsbn(),
-            'category' => $object->getCategory(),
+            'category' => $object->getCategory()->getId(),
         ];
+
+        $viewCategory = $context['category'] ?? false;
+
+        if ($viewCategory) {
+            $data['category'] = [
+                'id' => $object->getCategory()->getId(),
+                'label' => $object->getCategory()->getLabel(),
+            ];
+        }
+
+        return $data;
     }
 }

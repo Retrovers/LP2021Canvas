@@ -25,6 +25,14 @@ class BookController extends AbstractController
      */
     public function getOneAction(int $id): JsonResponse
     {
-        return $this->json($this->getDoctrine()->getRepository(Book::class)->find($id));
+        return $this->json($this->getDoctrine()->getRepository(Book::class)->find($id), 200, [], ['category' => true]);
+    }
+
+    /**
+     * @Route("/author/{id}", name="get_by_author_book",  methods={"GET"})
+     */
+    public function getByAuthorAction(int $id): JsonResponse
+    {
+        return $this->json($this->getDoctrine()->getRepository(Book::class)->findByAuthor($id), 200, [], ['category' => true]);
     }
 }

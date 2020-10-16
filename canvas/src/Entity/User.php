@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User.
  *
- * @ORM\Table(name="user", options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"})
+ * @ORM\Table(name="user")
  * @ORM\Entity
  */
 class User
@@ -17,23 +17,28 @@ class User
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function getFirstName(): ?string
     {
@@ -53,10 +58,5 @@ class User
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 }

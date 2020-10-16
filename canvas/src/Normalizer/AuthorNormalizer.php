@@ -23,7 +23,7 @@ class AuthorNormalizer implements ContextAwareNormalizerInterface
             'id' => $object->getId(),
             'firstName' => $object->getFirstName(),
             'lastName' => $object->getLastName(),
-            'birthDate' => $object->getBirthDate()->format('Y-m-d'),
+            'birthDate' => $object->getBirthDate(),
         ];
     }
 }
