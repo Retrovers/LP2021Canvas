@@ -19,7 +19,7 @@ final class Version20201016113000 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql("
+        $this->addSql('
         insert into author_book (book, author) values (580, 84);
 insert into author_book (book, author) values (872, 216);
 insert into author_book (book, author) values (35, 841);
@@ -1017,7 +1017,7 @@ insert into author_book (book, author) values (385, 659);
 insert into author_book (book, author) values (788, 898);
 insert into author_book (book, author) values (641, 770);
 insert into author_book (book, author) values (120, 334);  
-");
+');
     }
 
     public function down(Schema $schema): void
