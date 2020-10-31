@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Library;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -23,8 +24,13 @@ class LibraryController extends AbstractController
     /**
      * @Route("/{id}", name="get_one_library",  methods={"GET"})
      */
-    public function getOneAction(int $id): JsonResponse
+    public function getOneAction(Request $request, int $id): JsonResponse
     {
-        return $this->json($this->getDoctrine()->getRepository(Library::class)->find($id));
+        $context = [];
+        $needBooks = $request->get('book');
+        if (null !== $needBooks) {
+            $context['book'] = true;
+        }
+        return $this->json($this->getDoctrine()->getRepository(Library::class)->find($id), 200, [], $context);
     }
 }
