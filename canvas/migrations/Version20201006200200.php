@@ -1022,12 +1022,10 @@ insert into book (id, label, isbn, category) values (999, 'Matsoft', '588214582-
 insert into book (id, label, isbn, category) values (1000, 'Stringtough', '214205990-2', 9);
         "
         );
-
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

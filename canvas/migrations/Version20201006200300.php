@@ -122,12 +122,10 @@ insert into library (id, name) values (99, 'Liuhe');
 insert into library (id, name) values (100, 'Mascote');
 insert into library (id, name) values (101, 'Huwan');"
         );
-
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }
